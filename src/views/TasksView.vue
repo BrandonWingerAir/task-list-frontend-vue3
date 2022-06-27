@@ -7,10 +7,12 @@
         <div class="col-span-6 space-y-4 px-1"
              style="height: 500px">
           <div
-               class="p-8 bg-white shadow-md rounded flex items-center justify-between">
+              v-for="(task, index) in tasks"
+              :key="index"
+              class="p-8 bg-white shadow-md rounded flex items-center justify-between">
             <div>
-              <div>Test</div>
-              <div class="text-gray-500 text-sm">Timestamp</div>
+              <div>{{ task.text }}</div>
+              <div class="text-gray-500 text-sm">{{ task.createdAt.toString() }}</div>
             </div>
             <div class="space-x-2">
               <button class="px-2 text-red-600"
@@ -40,3 +42,22 @@
     </div>
   </div>
 </template>
+
+<script>
+import { defineComponent, reactive } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const tasks = reactive([
+      {
+        text: "Test Task",
+        createdAt: new Date()
+      }
+    ]);
+
+    return {
+      tasks
+    }
+  }
+});
+</script>
